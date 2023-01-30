@@ -1,0 +1,104 @@
+{
+  "title": "Azure Log analysis",
+  "version": "2.2",
+  "settings": {
+    "pagenumber": 0,
+    "editable": true,
+    "fullscreenEnabled": false,
+    "parameters": {},
+    "downloadImageEnabled": true,
+    "resizing": "all"
+  },
+  "pages": [
+    {
+      "title": "Countries",
+      "reports": [
+        {
+          "title": "Countries",
+          "query": "Match (s:host)-[r:session]->(d:host) RETURN r.country AS Country, count(r.country) AS Count \nORDER BY count(r.country) DESC\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 0,
+          "y": 0,
+          "type": "pie",
+          "selection": {
+            "index": "Country",
+            "value": "Count",
+            "key": "(none)"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Over 100,00 bytes",
+          "query": "Match (s:host)-[r:session]->(d:host) Where r.Bytes > 100000 Return s,r,d\n\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 3,
+          "y": 0,
+          "type": "graph",
+          "selection": {
+            "host": "(id)"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "Port Breakdown",
+          "query": "Match (s:host)-[r:session]->(d:host) RETURN r.DestinationPort AS Port, count(r.DestinationPort) AS Count \nORDER BY count(r.DestinationPort) DESC\n\n\n",
+          "width": 4,
+          "height": 2,
+          "x": 6,
+          "y": 0,
+          "type": "pie",
+          "selection": {
+            "index": "Port",
+            "value": "Count",
+            "key": "(none)"
+          },
+          "settings": {
+            "nodePositions": {}
+          }
+        },
+        {
+          "title": "SSH Traffic by Country",
+          "query": "\nMatch (s:host)-[r:session]->(d:host) Where r.DestinationPort = 22 RETURN r.country AS Country, count(r.country) AS Count \nORDER BY count(r.country) DESC\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 0,
+          "y": 2,
+          "type": "pie",
+          "selection": {
+            "index": "Country",
+            "value": "Count",
+            "key": "(none)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "layout": "tree"
+          }
+        },
+        {
+          "title": "SSH Graph",
+          "query": "\nMatch (s:host)-[r:session]->(d:host) Where r.DestinationPort = 22 Return s,r,d\n\n",
+          "width": 3,
+          "height": 2,
+          "x": 3,
+          "y": 2,
+          "type": "graph",
+          "selection": {
+            "host": "(id)"
+          },
+          "settings": {
+            "nodePositions": {},
+            "layout": "tree"
+          }
+        }
+      ]
+    }
+  ],
+  "parameters": {},
+  "extensions": {}
+}
