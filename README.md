@@ -7,8 +7,8 @@ Take all data needed export to csv. All nodes have to be unique and contigous. Y
 
 
 ### There are two main cell blocks in this example
-* 1. Push all sessions as source and destiantion from csv, and types are all hosts.
-3. Clear the database to rerun the the above.
+1. Push all sessions as source and destiantion from csv, and types are all hosts.
+2. Clear the database to rerun the the above.
 
 
 ### Notes
